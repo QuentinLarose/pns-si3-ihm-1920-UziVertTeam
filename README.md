@@ -9,5 +9,5 @@ Projet IHM S6
 - [Quentin Larose](https://github.com/QuentinLarose)
 - [Timothée Poulain](https://github.com/TimotheePoulainPoly)
 - [Joris Liebgott](https://github.com/jorisLiebgott)
-- 
+- [Bertolotto Loïc](https://github.com/bertolottoloic)
 -
