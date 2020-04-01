@@ -1,4 +1,4 @@
-package com.example.freshprox.ui.main;
+package com.example.freshprox.main;
 
 import androidx.lifecycle.ViewModel;
 

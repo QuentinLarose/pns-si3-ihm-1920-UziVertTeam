@@ -1,10 +1,11 @@
-package com.example.freshprox;
+package com.example.freshprox.main;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-import com.example.freshprox.ui.main.MainFragment;
+import com.example.freshprox.R;
+import com.example.freshprox.main.MainFragment;
 
 public class MainActivity extends AppCompatActivity {
 
