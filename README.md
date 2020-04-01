@@ -10,4 +10,3 @@ Projet IHM S6
 - [Timothée Poulain](https://github.com/TimotheePoulainPoly)
 - [Joris Liebgott](https://github.com/jorisLiebgott)
 - [Bertolotto Loïc](https://github.com/bertolottoloic)
--
