@@ -30,15 +30,16 @@ public class MainFragment extends Fragment {
     private ConstraintLayout layoutItem;
     private View view;
 
-
-    public MainFragment(SwitchActivity sA){
-        this.switchActivity = sA;
+    public static MainFragment newInstance() {
+        return new MainFragment();
     }
+
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+        this.switchActivity = (SwitchActivity) getActivity();
         this.view = inflater.inflate(R.layout.main_fragment, container, false);
         Button search = this.view.findViewById(R.id.tosearch);
         Button vendor = this.view.findViewById(R.id.vendor);

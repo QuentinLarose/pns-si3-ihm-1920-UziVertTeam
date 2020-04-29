@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".main.MainFragment"
@@ -37,10 +37,11 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintWidth_percent="0.8"
-        app:layout_constraintHeight_percent="0.25"
+        app:layout_constraintHeight_percent="0.35"
+        android:layout_marginBottom="1pt"
         android:id="@+id/tosearch"
         android:text="Trouver un producteur"
-        app:layout_constraintBottom_toTopOf="@id/message"
+        app:layout_constraintTop_toBottomOf="@id/title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -48,10 +49,10 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintWidth_percent="0.8"
-        app:layout_constraintHeight_percent="0.25"
+        app:layout_constraintHeight_percent="0.35"
         android:id="@+id/vendor"
         android:text="Ajouter mon commerce"
-        app:layout_constraintTop_toBottomOf="@id/message"
+        app:layout_constraintTop_toBottomOf="@id/tosearch"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
 
