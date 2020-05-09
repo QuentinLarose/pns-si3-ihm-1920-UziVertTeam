@@ -24,7 +24,7 @@ public class VendorAdapter extends BaseAdapter implements Filterable {
     ListOfVendor currentVendors;
     private ValueFilter valueFilter;
 
-    VendorAdapter(Context context, ListOfVendor vendors) {
+    public VendorAdapter(Context context, ListOfVendor vendors) {
         this.mInflater = LayoutInflater.from(context);
         this.vendors = vendors;
         this.currentVendors = vendors;
@@ -78,7 +78,6 @@ public class VendorAdapter extends BaseAdapter implements Filterable {
         //Invoked in a worker thread to filter the data according to the constraint.
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
-            Log.d("Adapter constraint", constraint.toString());
             FilterResults results = new FilterResults();
             if (constraint != null && constraint.length() > 0) {
                 ListOfVendor filterList = new ListOfVendor(true);
@@ -92,7 +91,6 @@ public class VendorAdapter extends BaseAdapter implements Filterable {
                 results.values = filterList;
             } else {
                 results.count = vendors.size();
-                Log.d("adapter else",results.count+"");
                 results.values = vendors;
             }
             return results;
