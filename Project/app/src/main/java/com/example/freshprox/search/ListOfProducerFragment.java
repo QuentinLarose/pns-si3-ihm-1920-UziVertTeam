@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SearchView;
 
@@ -24,12 +25,13 @@ public class ListOfProducerFragment extends Fragment {
 
     View view;
     ListOfVendor vendors;
-    public ListOfProducerFragment() {
-        // Required empty public constructor
+    SearchActivity sA;
+    public ListOfProducerFragment(SearchActivity sA) {
+        this.sA = sA;
     }
 
-    public static ListOfProducerFragment newInstance() {
-        return new ListOfProducerFragment();
+    public static ListOfProducerFragment newInstance(SearchActivity sA) {
+        return new ListOfProducerFragment(sA);
     }
 
 
@@ -44,6 +46,10 @@ public class ListOfProducerFragment extends Fragment {
         VendorAdapter adapter = new VendorAdapter(getContext(), vendors);
         ListView listView = view.findViewById(R.id.listView);
         listView.setAdapter(adapter);
+        Button btn = view.findViewById(R.id.btnMap);
+        btn.setOnClickListener(v -> {
+            sA.changeFragment();
+        });
         SearchView searchBar = view.findViewById(R.id.searchBar);
         searchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override

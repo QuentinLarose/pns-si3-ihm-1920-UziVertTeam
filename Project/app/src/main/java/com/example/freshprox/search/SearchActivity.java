@@ -12,13 +12,14 @@ import com.example.freshprox.R;
 public class SearchActivity extends AppCompatActivity implements View.OnClickListener, IButtonClickListener{
     private IButtonClickListener mCallBack;
     private MapFragment mapFragment;
+    private ListOfProducerFragment lOPF;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-        Toast.makeText(this,"dans le fragment dessous avec: ", Toast.LENGTH_LONG).show();
-        findViewById( R.id.search_activity_button_map).setOnClickListener(new View.OnClickListener() {
+        //Toast.makeText(this,"dans le fragment dessous avec: ", Toast.LENGTH_LONG).show();
+        /*findViewById( R.id.search_activity_button_map).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onButtonMapClicked(v);
@@ -33,13 +34,20 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
                     mapFragment = null;
                 }
             }
-        });
+        });*/
+        lOPF = (ListOfProducerFragment) getSupportFragmentManager().findFragmentById(R.id.frame_layout_lOP);
+        if (lOPF == null) {
+            lOPF = ListOfProducerFragment.newInstance(this);
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.frame_layout_lOP, lOPF)
+                    .commitNow();
+        }
     }
 
     @Override
     public void onClick(View button) {
         Toast.makeText(this,"dans le fragment dessous avec: ", Toast.LENGTH_LONG).show();
-        if(button.getId() == R.id.search_activity_button_map)mCallBack.onButtonMapClicked(button);
+        //if(button.getId() == R.id.search_activity_button_map)mCallBack.onButtonMapClicked(button);
         Toast.makeText(this,"ZOUZA: ", Toast.LENGTH_LONG).show();
     }
 
@@ -50,6 +58,21 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
 
         Toast.makeText(this,"dans le fragment dessous avec: ", Toast.LENGTH_LONG).show();
        mapFragment = (MapFragment) getSupportFragmentManager().findFragmentById(R.id.frame_layout_map);
+        if(mapFragment == null){
+            mapFragment = new MapFragment();
+            Bundle args = new Bundle();
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.frame_layout_map,mapFragment).commit();
+        }
+    }
+
+    public void changeFragment(){
+        if(lOPF != null){
+            getSupportFragmentManager().beginTransaction().remove(lOPF).commit();
+            lOPF = null;
+        }
+        Toast.makeText(this,"dans le fragment dessous avec: ", Toast.LENGTH_LONG).show();
+        mapFragment = (MapFragment) getSupportFragmentManager().findFragmentById(R.id.frame_layout_map);
         if(mapFragment == null){
             mapFragment = new MapFragment();
             Bundle args = new Bundle();

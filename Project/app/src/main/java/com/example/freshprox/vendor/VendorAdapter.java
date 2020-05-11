@@ -15,9 +15,6 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.example.freshprox.R;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class VendorAdapter extends BaseAdapter implements Filterable {
     LayoutInflater mInflater;
     ListOfVendor vendors;
@@ -51,11 +48,14 @@ public class VendorAdapter extends BaseAdapter implements Filterable {
         ConstraintLayout layoutItem;
 
         //(1) : Réutilisation des layouts
-        layoutItem = (ConstraintLayout) (convertView == null ? mInflater.inflate(R.layout.vendor_layout, parent, false) : convertView);
+        layoutItem = (ConstraintLayout) (convertView == null ? mInflater.inflate(R.layout.vendor_list_layout, parent, false) : convertView);
         ImageView imageVendor = layoutItem.findViewById(R.id.imageVendor);
         TextView vendorName = layoutItem.findViewById(R.id.vendorName);
+        TextView address = layoutItem.findViewById(R.id.address);
+        address.setText(currentVendors.get(position).getAddress().toString());
         vendorName.setText(currentVendors.get(position).getName());
         imageVendor.setImageResource(currentVendors.get(position).getPicture());
+
         layoutItem.setOnClickListener(v -> {
             // if (listener!=null) listener.onClickName(position);
             Log.d("VendorAdapter", "click " + (position + 1));

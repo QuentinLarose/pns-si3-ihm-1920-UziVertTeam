@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,7 +9,7 @@
 
 
 
-    <Button
+    <!--<Button
         android:id="@+id/search_activity_button_map"
         android:layout_width="match_parent"
         android:layout_height="200dp"
@@ -20,16 +20,26 @@
         android:id="@+id/closeMapButton"
         android:layout_width="match_parent"
         android:layout_height="63dp"
-        android:text="Close Map" />
+        android:text="Close Map" />-->
 
 
     <FrameLayout
         android:id="@+id/frame_layout_map"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/frame_layout_lOP"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        app:layout_constraintTop_toTopOf="parent">
 
     </FrameLayout>
 
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

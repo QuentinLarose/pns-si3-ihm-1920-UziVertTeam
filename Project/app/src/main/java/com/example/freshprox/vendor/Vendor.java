@@ -31,7 +31,7 @@ public class Vendor {
         return name;
     }
 
-    public Address getgetAddress() {
+    public Address getAddress() {
         return address;
     }
 
