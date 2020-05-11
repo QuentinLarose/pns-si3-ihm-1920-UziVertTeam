@@ -1,4 +1,8 @@
 package com.example.freshprox.home;
 
-public class HomeActivity {
+import androidx.appcompat.app.AppCompatActivity;
+
+public class HomeActivity extends AppCompatActivity {
+
+
 }

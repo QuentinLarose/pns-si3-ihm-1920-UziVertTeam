@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.example.freshprox.R;
 import com.example.freshprox.SwitchActivity;
@@ -19,6 +20,7 @@ public class MainActivity extends AppCompatActivity implements SwitchActivity {
                     .replace(R.id.container, MainFragment.newInstance())
                     .commitNow();
         }
+        Log.d("TAG","MainActivity");
     }
 
     @Override
