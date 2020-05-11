@@ -18,20 +18,22 @@ public class Vendor {
     private PraticedPrice practicedPrice;
     private List<Product> salesProduct;
     private int picture;
+    private String phoneNumber;
 
-    public Vendor(String name, Address address, PraticedPrice practicedPrice, List<Product> salesProduct, int picture){
+    public Vendor(String name, Address address, PraticedPrice practicedPrice, List<Product> salesProduct, int picture, String phoneNumber){
         this.name = name;
         this.address = address;
         this.practicedPrice = practicedPrice;
         this.salesProduct = salesProduct;
         this.picture = picture;
+        this.phoneNumber = phoneNumber;
     }
 
     public String getName() {
         return name;
     }
 
-    public Address getgetAddress() {
+    public Address getAddress() {
         return address;
     }
 
@@ -45,5 +47,9 @@ public class Vendor {
 
     public int getPicture() {
         return picture;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 }
