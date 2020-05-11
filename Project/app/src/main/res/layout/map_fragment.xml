@@ -1,74 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:background="#FFFF00">
+    tools:context=".search.MapFragment">
 
     <TextView
-        android:id="@+id/label"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
+        android:text="Carte des producteurs"
         android:gravity="center"
         android:textSize="24sp"
         android:layout_marginTop="10dp"
-        android:text="Saisir un nombre ici"
-        android:layout_alignParentLeft="true" />
+        android:layout_marginBottom="20dp"
+        tools:ignore="MissingConstraints" />
 
-    <EditText
-        android:id="@+id/editText"
+    <org.osmdroid.views.MapView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@id/label"
-        android:layout_marginTop="5dp"
-        android:layout_alignParentLeft="true" />
+        android:layout_height="match_parent"
+        android:id="@+id/map"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:orientation="horizontal"
-        android:layout_marginTop="30dp"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/editText">
-
-        <Button
-            android:id="@+id/fragment_main_button_activity"
-            android:transitionName="btActivity"
-            android:layout_width="100dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:text="Afficher dans une autre activité"
-            android:textColor="#FFF"
-            android:textSize="14sp"/>
-
-        <Button
-            android:id="@+id/fragment_main_button_fragment"
-            android:transitionName="btFragment"
-            android:layout_width="100dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:text="Afficher dans le fragment dessous"
-            android:textColor="#FFF"
-            android:textSize="14sp"/>
-
-        <Button
-            android:id="@+id/fragment_main_button_clear"
-            android:transitionName="btFragment"
-            android:layout_width="100dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:text="Effacer le fragment dessous"
-            android:textColor="#FFF"
-            android:textSize="14sp"/>
-    </LinearLayout>
-</RelativeLayout>
+</LinearLayout>
