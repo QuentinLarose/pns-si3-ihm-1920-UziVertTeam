@@ -5,10 +5,12 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 
 import androidx.core.content.ContextCompat;
@@ -32,16 +34,27 @@ import java.util.ArrayList;
 public class MapFragment extends Fragment implements View.OnClickListener{
     private MapView map;
     IMapController mapController;
+    SearchActivity sA;
 
-    public MapFragment(){
+    public MapFragment(SearchActivity sA){
         Log.d("LAROSE","MapFrgament");
+        this.sA = sA;
     }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         Log.d("LAROSE","Creation map debut OnCreateView");
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
+        Configuration.getInstance().load(getContext(), PreferenceManager.getDefaultSharedPreferences(getContext()));
+
         View v = inflater.inflate(R.layout.map_fragment, container, false);
+        Button btn = v.findViewById(R.id.retour);
+        btn.setOnClickListener(v1 -> {
+            sA.changeFragment();
+        });
         map = (MapView) v.findViewById(R.id.map);
         Log.d("LAROSE","map= "+map);
         /*
