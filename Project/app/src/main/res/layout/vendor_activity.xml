@@ -8,29 +8,127 @@
     android:layout_height="match_parent"
     tools:context=".vendor.VendorActivity">
 
-    <!--<SearchView
-        android:layout_width="wrap_content"
+    <TextView
+        android:id="@+id/title"
         android:layout_height="wrap_content"
-        android:id="@+id/searchBar"
+        android:layout_width="match_parent"
+        android:textSize="64px"
+        android:gravity="center"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"/>
+        android:text="Ajouter un nouveau producteur"
+        android:paddingTop="10px"
+        android:paddingBottom="10px" />
 
-&lt;!&ndash;    <TextView
-        android:layout_width="wrap_content"
+    <ScrollView
+        app:layout_constraintTop_toBottomOf="@id/title"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@id/text"
-        android:text="VendorActivity"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>&ndash;&gt;
+        tools:ignore="MissingConstraints">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <ListView
-        android:id="@+id/listView"
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:textSize="48px"
+                android:gravity="center"
+                app:layout_constraintTop_toTopOf="parent"
+                android:text="Nom du producteur" />
+            <EditText
+                android:id="@+id/name_input"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:inputType="text"/>
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:textSize="48px"
+                android:gravity="center"
+                app:layout_constraintTop_toTopOf="parent"
+                android:text="Adresse" />
+            <Button
+                android:id="@+id/adress_locator"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Localiser le commerce"
+                android:layout_gravity="center"/>
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:textSize="48px"
+                android:gravity="center"
+                app:layout_constraintTop_toTopOf="parent"
+                android:text="Numéro de téléphone" />
+            <EditText
+                android:id="@+id/phone_number_input"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:inputType="text"/>
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:textSize="48px"
+                android:gravity="center"
+                app:layout_constraintTop_toTopOf="parent"
+                android:text="Prix pratiqués" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <Button
+                    android:id="@+id/price_low_button"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Bas" />
+                <Button
+                    android:id="@+id/price_medium_button"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Moyens" />
+                <Button
+                    android:id="@+id/price_high_button"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Élevés" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:textSize="48px"
+                android:gravity="center"
+                app:layout_constraintTop_toTopOf="parent"
+                android:text="Image du commerce" />
+
+            <ImageView
+                android:id="@+id/IdProf"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/background"
+                android:layout_margin="15dp"/>
+
+            <Button
+                android:id="@+id/UploadBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ajouter une image"
+                android:layout_gravity="center"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:id="@+id/submitButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/searchBar"
-        android:dividerHeight="5dp"
-        android:divider="#ffa0ca12" />-->
+        android:text="Valider la création"
+        android:layout_gravity="center"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
