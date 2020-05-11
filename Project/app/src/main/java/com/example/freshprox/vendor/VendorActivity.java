@@ -19,10 +19,10 @@ public class VendorActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.vendor_activity);
-        if (savedInstanceState == null) {
+/*        if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.main, ListOfProducerFragment.newInstance())
                     .commitNow();
-        }
+        }*/
     }
 }

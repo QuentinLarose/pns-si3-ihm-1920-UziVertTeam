@@ -17,10 +17,18 @@
         android:id="@+id/vendorName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_margin="20dp"
         app:layout_constraintStart_toEndOf="@+id/imageVendor"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/address"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toEndOf="@+id/imageVendor"
+        app:layout_constraintTop_toBottomOf="@id/vendorName" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
