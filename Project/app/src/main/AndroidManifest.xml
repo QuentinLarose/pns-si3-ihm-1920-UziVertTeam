@@ -22,6 +22,8 @@
         </activity>
         <activity android:name=".search.SearchActivity"/>
         <activity android:name=".vendor.VendorActivity"/>
+        <activity android:name=".home.HomeActivity"/>
+        <!-- <activity android:name=".main.MainActivity"/> -->
     </application>
 
 </manifest>

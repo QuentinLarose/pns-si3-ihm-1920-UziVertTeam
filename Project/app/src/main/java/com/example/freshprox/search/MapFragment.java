@@ -33,13 +33,17 @@ public class MapFragment extends Fragment implements View.OnClickListener{
     private MapView map;
     IMapController mapController;
 
-    public MapFragment(){}
+    public MapFragment(){
+        Log.d("LAROSE","MapFrgament");
+    }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
+        Log.d("LAROSE","Creation map debut OnCreateView");
         View v = inflater.inflate(R.layout.map_fragment, container, false);
         map = (MapView) v.findViewById(R.id.map);
+        Log.d("LAROSE","map= "+map);
         /*
         map.setTileSource(TileSourceFactory.MAPNIK);
         configMap();
@@ -72,7 +76,7 @@ public class MapFragment extends Fragment implements View.OnClickListener{
 
         mOverlay.setFocusItemsOnTap(true);
         map.getOverlays().add(mOverlay);
-        Log.d("TAG","Creation map");
+        Log.d("LAROSE","Creation map FIN");
         return v;
     }
 
