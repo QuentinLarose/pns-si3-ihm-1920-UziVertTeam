@@ -59,7 +59,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         Toast.makeText(this,"dans le fragment dessous avec: ", Toast.LENGTH_LONG).show();
        mapFragment = (MapFragment) getSupportFragmentManager().findFragmentById(R.id.frame_layout_map);
         if(mapFragment == null){
-            mapFragment = new MapFragment();
+            mapFragment = new MapFragment(this);
             Bundle args = new Bundle();
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.frame_layout_map,mapFragment).commit();
@@ -70,15 +70,26 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         if(lOPF != null){
             getSupportFragmentManager().beginTransaction().remove(lOPF).commit();
             lOPF = null;
+            Toast.makeText(this,"dans le fragment dessous avec: ", Toast.LENGTH_LONG).show();
+            mapFragment = (MapFragment) getSupportFragmentManager().findFragmentById(R.id.frame_layout_map);
+            if(mapFragment == null){
+                mapFragment = new MapFragment(this);
+                Bundle args = new Bundle();
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.frame_layout_map,mapFragment).commit();
+            }
+        }else{
+            getSupportFragmentManager().beginTransaction().remove(mapFragment).commit();
+            mapFragment = null;
+            lOPF = (ListOfProducerFragment) getSupportFragmentManager().findFragmentById(R.id.frame_layout_lOP);
+            if(lOPF == null){
+                lOPF = new ListOfProducerFragment(this);
+                Bundle args = new Bundle();
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.frame_layout_lOP, lOPF).commit();
+            }
         }
-        Toast.makeText(this,"dans le fragment dessous avec: ", Toast.LENGTH_LONG).show();
-        mapFragment = (MapFragment) getSupportFragmentManager().findFragmentById(R.id.frame_layout_map);
-        if(mapFragment == null){
-            mapFragment = new MapFragment();
-            Bundle args = new Bundle();
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.frame_layout_map,mapFragment).commit();
-        }
+
     }
 
 
