@@ -53,7 +53,7 @@ public class ListOfProducerFragment extends Fragment {
         ListView listView = view.findViewById(R.id.listView);
         listView.setAdapter(adapter);
         Button btn = view.findViewById(R.id.btnMap);
-        if(getResources().getDisplayMetrics().density<1200 || getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
+        if(getResources().getDisplayMetrics().heightPixels<1200 || getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
             btn.setOnClickListener(v -> {
             sA.changeFragment();
             });

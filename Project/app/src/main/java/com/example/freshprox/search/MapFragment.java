@@ -52,7 +52,7 @@ public class MapFragment extends Fragment implements View.OnClickListener{
 
         View view = inflater.inflate(R.layout.map_fragment, container, false);
         Button btn = view.findViewById(R.id.retour);
-        if(getResources().getDisplayMetrics().density<1200 || getResources().getConfiguration().orientation == android.content.res.Configuration.ORIENTATION_PORTRAIT){
+        if(getResources().getDisplayMetrics().heightPixels<1200 || getResources().getConfiguration().orientation == android.content.res.Configuration.ORIENTATION_PORTRAIT){
             btn.setOnClickListener(v -> {
                 sA.changeFragment();
             });
