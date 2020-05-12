@@ -1,5 +1,6 @@
 package com.example.freshprox.search;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -52,9 +53,13 @@ public class ListOfProducerFragment extends Fragment {
         ListView listView = view.findViewById(R.id.listView);
         listView.setAdapter(adapter);
         Button btn = view.findViewById(R.id.btnMap);
-        btn.setOnClickListener(v -> {
+        if(getResources().getDisplayMetrics().density<1200 || getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
+            btn.setOnClickListener(v -> {
             sA.changeFragment();
-        });
+            });
+        } else {
+            ((ViewGroup) btn.getParent()).removeView(btn);
+        }
         SearchView searchBar = view.findViewById(R.id.searchBar);
         searchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override

@@ -10,18 +10,21 @@
 
     <FrameLayout
         android:id="@+id/frame_layout_map"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintWidth_percent="0.5"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/frame_layout_lOP">
 
     </FrameLayout>
 
     <FrameLayout
         android:id="@+id/frame_layout_lOP"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintWidth_percent="0.5"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent">
 
     </FrameLayout>
 
