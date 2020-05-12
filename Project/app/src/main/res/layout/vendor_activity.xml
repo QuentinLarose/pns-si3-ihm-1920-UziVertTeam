@@ -65,7 +65,7 @@
                 android:id="@+id/phone_number_input"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
-                android:inputType="text"/>
+                android:inputType="number"/>
             <TextView
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
@@ -74,29 +74,28 @@
                 app:layout_constraintTop_toTopOf="parent"
                 android:text="Prix pratiqués" />
 
-            <LinearLayout
+            <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/price_range"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-                <Button
-                    android:id="@+id/price_low_button"
-                    android:layout_height="wrap_content"
+                <RadioButton android:id="@+id/low_price"
                     android:layout_width="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Bas" />
-                <Button
-                    android:id="@+id/price_medium_button"
                     android:layout_height="wrap_content"
+                    android:text="Bas"
+                    android:layout_weight="1"/>
+                <RadioButton android:id="@+id/medium_price"
                     android:layout_width="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Moyens" />
-                <Button
-                    android:id="@+id/price_high_button"
                     android:layout_height="wrap_content"
+                    android:text="Moyens"
+                    android:checked="true"
+                    android:layout_weight="1"/>
+                <RadioButton android:id="@+id/high_price"
                     android:layout_width="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Élevés" />
-            </LinearLayout>
+                    android:layout_height="wrap_content"
+                    android:text="Élevés"
+                    android:layout_weight="1"/>
+            </RadioGroup>
 
             <TextView
                 android:layout_height="wrap_content"

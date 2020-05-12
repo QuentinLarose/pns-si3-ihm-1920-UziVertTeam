@@ -13,6 +13,30 @@ public class Address {
         this.city = city;
     }
 
+    public String getAdr() {
+        return adr;
+    }
+
+    public void setAdr(String adr) {
+        this.adr = adr;
+    }
+
+    public String getPostalCode() {
+        return postalCode;
+    }
+
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
     @NonNull
     @Override
     public String toString() {
