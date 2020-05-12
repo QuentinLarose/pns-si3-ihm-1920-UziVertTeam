@@ -1,13 +1,17 @@
 package com.example.freshprox.vendor;
 
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.SearchView;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.freshprox.R;
+import com.example.freshprox.SwitchActivity;
 import com.example.freshprox.main.MainFragment;
 import com.example.freshprox.search.ListOfProducerFragment;
 
@@ -19,10 +23,7 @@ public class VendorActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.vendor_activity);
-/*        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.main, ListOfProducerFragment.newInstance())
-                    .commitNow();
-        }*/
+
     }
+
 }

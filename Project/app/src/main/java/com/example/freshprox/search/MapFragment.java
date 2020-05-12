@@ -36,14 +36,14 @@ public class MapFragment extends Fragment implements View.OnClickListener{
     IMapController mapController;
     SearchActivity sA;
 
-    public MapFragment(SearchActivity sA){
+    public MapFragment(){
         Log.d("LAROSE","MapFrgament");
-        this.sA = sA;
     }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
+        this.sA = (SearchActivity) getActivity();
         Log.d("LAROSE","Creation map debut OnCreateView");
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);

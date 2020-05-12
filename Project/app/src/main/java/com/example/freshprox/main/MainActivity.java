@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity implements SwitchActivity {
     }
 
     @Override
-    public void onClickSwitch(Class<?> cls) {
+    public void onClickSwitch(Class<?> cls, Object object) {
         Intent intent = new Intent(getApplicationContext(), cls);
         startActivity(intent);
     }

@@ -24,6 +24,7 @@
         <activity android:name=".vendor.VendorActivity"/>
         <!--<activity android:name=".home.HomeActivity"/> -->
         <activity android:name=".main.MainActivity"/>
+        <activity android:name=".vendor.VendorDetailsActivity"/>
     </application>
 
 </manifest>

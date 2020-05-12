@@ -12,6 +12,7 @@ import android.widget.ListView;
 import android.widget.SearchView;
 
 import com.example.freshprox.R;
+import com.example.freshprox.SwitchActivity;
 import com.example.freshprox.vendor.ListOfVendor;
 import com.example.freshprox.vendor.VendorAdapter;
 
@@ -26,12 +27,13 @@ public class ListOfProducerFragment extends Fragment {
     View view;
     ListOfVendor vendors;
     SearchActivity sA;
-    public ListOfProducerFragment(SearchActivity sA) {
-        this.sA = sA;
+
+    public ListOfProducerFragment() {
+
     }
 
-    public static ListOfProducerFragment newInstance(SearchActivity sA) {
-        return new ListOfProducerFragment(sA);
+    public static ListOfProducerFragment newInstance() {
+        return new ListOfProducerFragment();
     }
 
 
@@ -39,11 +41,14 @@ public class ListOfProducerFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        this.sA = (SearchActivity) getActivity();
+
         super.onCreate(savedInstanceState);
         this.view = inflater.inflate(R.layout.fragment_list_of_producer, container, false);
 
         vendors = new ListOfVendor(false);
         VendorAdapter adapter = new VendorAdapter(getContext(), vendors);
+        adapter.setSwitchActivity((SwitchActivity) getActivity());
         ListView listView = view.findViewById(R.id.listView);
         listView.setAdapter(adapter);
         Button btn = view.findViewById(R.id.btnMap);

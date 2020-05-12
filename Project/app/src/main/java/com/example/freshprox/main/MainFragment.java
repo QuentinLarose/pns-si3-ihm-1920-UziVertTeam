@@ -57,7 +57,7 @@ public class MainFragment extends Fragment {
 
     private void setButtonClickListener(Button button, Class<?> cls){
         button.setOnClickListener((view) -> {
-            if (switchActivity != null) switchActivity.onClickSwitch(cls);
+            if (switchActivity != null) switchActivity.onClickSwitch(cls, null);
         });
     }
 

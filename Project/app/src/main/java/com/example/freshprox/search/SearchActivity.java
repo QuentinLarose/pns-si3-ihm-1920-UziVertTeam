@@ -1,23 +1,36 @@
 package com.example.freshprox.search;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.PersistableBundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
 
 import com.example.freshprox.R;
+import com.example.freshprox.SwitchActivity;
 
-public class SearchActivity extends AppCompatActivity implements View.OnClickListener, IButtonClickListener{
+public class SearchActivity extends AppCompatActivity implements View.OnClickListener, IButtonClickListener, SwitchActivity {
     private IButtonClickListener mCallBack;
     private MapFragment mapFragment;
     private ListOfProducerFragment lOPF;
+    private Boolean isLOPF;
+    SharedPreferences prefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+
+        this.isLOPF = (savedInstanceState!=null) ? savedInstanceState.getBoolean("isLOPF"): true;
+
         //Toast.makeText(this,"dans le fragment dessous avec: ", Toast.LENGTH_LONG).show();
         /*findViewById( R.id.search_activity_button_map).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -35,9 +48,10 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
                 }
             }
         });*/
+        mapFragment = (MapFragment) getSupportFragmentManager().findFragmentById(R.id.frame_layout_map);
         lOPF = (ListOfProducerFragment) getSupportFragmentManager().findFragmentById(R.id.frame_layout_lOP);
-        if (lOPF == null) {
-            lOPF = ListOfProducerFragment.newInstance(this);
+        if (lOPF == null && isLOPF) {
+            lOPF = ListOfProducerFragment.newInstance();
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.frame_layout_lOP, lOPF)
                     .commitNow();
@@ -59,7 +73,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         Toast.makeText(this,"dans le fragment dessous avec: ", Toast.LENGTH_LONG).show();
        mapFragment = (MapFragment) getSupportFragmentManager().findFragmentById(R.id.frame_layout_map);
         if(mapFragment == null){
-            mapFragment = new MapFragment(this);
+            mapFragment = new MapFragment();
             Bundle args = new Bundle();
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.frame_layout_map,mapFragment).commit();
@@ -69,21 +83,24 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     public void changeFragment(){
         if(lOPF != null){
             getSupportFragmentManager().beginTransaction().remove(lOPF).commit();
+            isLOPF = false;
             lOPF = null;
             Toast.makeText(this,"dans le fragment dessous avec: ", Toast.LENGTH_LONG).show();
             mapFragment = (MapFragment) getSupportFragmentManager().findFragmentById(R.id.frame_layout_map);
             if(mapFragment == null){
-                mapFragment = new MapFragment(this);
+                mapFragment = new MapFragment();
                 Bundle args = new Bundle();
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.frame_layout_map,mapFragment).commit();
             }
         }else{
             getSupportFragmentManager().beginTransaction().remove(mapFragment).commit();
+            isLOPF = true;
             mapFragment = null;
             lOPF = (ListOfProducerFragment) getSupportFragmentManager().findFragmentById(R.id.frame_layout_lOP);
             if(lOPF == null){
-                lOPF = new ListOfProducerFragment(this);
+                Log.d("SA", "lOPF created via onCreate");
+                lOPF = new ListOfProducerFragment();
                 Bundle args = new Bundle();
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.frame_layout_lOP, lOPF).commit();
@@ -92,5 +109,17 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
 
     }
 
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean("isLOPF",this.isLOPF);
+    }
 
+    @Override
+    public void onClickSwitch(Class<?> cls, Object object) {
+        Integer position = (Integer) object;
+        Intent intent = new Intent(getApplicationContext(), cls);
+        intent.putExtra("position", position);
+        this.startActivity(intent);
+    }
 }
