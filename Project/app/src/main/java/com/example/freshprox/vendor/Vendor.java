@@ -1,8 +1,14 @@
 package com.example.freshprox.vendor;
 
+
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.List;
 
 public class Vendor {
+
+
 
     public enum PraticedPrice{
         low, moderate, high
@@ -31,6 +37,9 @@ public class Vendor {
         this.latitude = lat;
         this.longitude = lng;
     }
+
+
+
 
     public String getName() {
         return name;
@@ -63,4 +72,5 @@ public class Vendor {
     public String getPhoneNumber() {
         return phoneNumber;
     }
+
 }

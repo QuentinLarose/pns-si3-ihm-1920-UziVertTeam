@@ -10,11 +10,17 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.SearchView;
 import android.widget.Toast;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.SearchView;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.freshprox.R;
+import com.example.freshprox.SwitchActivity;
 import com.example.freshprox.main.MainFragment;
 import com.example.freshprox.search.ListOfProducerFragment;
 import com.google.gson.Gson;
@@ -88,4 +94,5 @@ public class VendorActivity extends AppCompatActivity {
             }
         });
     }
+
 }

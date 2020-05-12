@@ -36,26 +36,30 @@ public class MapFragment extends Fragment implements View.OnClickListener{
     IMapController mapController;
     SearchActivity sA;
 
-    public MapFragment(SearchActivity sA){
+    public MapFragment(){
         Log.d("LAROSE","MapFrgament");
-        this.sA = sA;
     }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
+        this.sA = (SearchActivity) getActivity();
         Log.d("LAROSE","Creation map debut OnCreateView");
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
         Configuration.getInstance().load(getContext(), PreferenceManager.getDefaultSharedPreferences(getContext()));
 
-        View v = inflater.inflate(R.layout.map_fragment, container, false);
-        Button btn = v.findViewById(R.id.retour);
-        btn.setOnClickListener(v1 -> {
-            sA.changeFragment();
-        });
-        map = (MapView) v.findViewById(R.id.map);
+        View view = inflater.inflate(R.layout.map_fragment, container, false);
+        Button btn = view.findViewById(R.id.retour);
+        if(getResources().getDisplayMetrics().heightPixels<1200 || getResources().getConfiguration().orientation == android.content.res.Configuration.ORIENTATION_PORTRAIT){
+            btn.setOnClickListener(v -> {
+                sA.changeFragment();
+            });
+        } else {
+            ((ViewGroup) btn.getParent()).removeView(btn);
+        }
+        map = (MapView) view.findViewById(R.id.map);
         Log.d("LAROSE","map= "+map);
         /*
         map.setTileSource(TileSourceFactory.MAPNIK);
@@ -90,7 +94,7 @@ public class MapFragment extends Fragment implements View.OnClickListener{
         mOverlay.setFocusItemsOnTap(true);
         map.getOverlays().add(mOverlay);
         Log.d("LAROSE","Creation map FIN");
-        return v;
+        return view;
     }
 
     private void configMap(){

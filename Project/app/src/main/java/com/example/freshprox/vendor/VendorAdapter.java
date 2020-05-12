@@ -14,12 +14,14 @@ import android.widget.TextView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.example.freshprox.R;
+import com.example.freshprox.SwitchActivity;
 
 public class VendorAdapter extends BaseAdapter implements Filterable {
     LayoutInflater mInflater;
     ListOfVendor vendors;
     ListOfVendor currentVendors;
     private ValueFilter valueFilter;
+    private SwitchActivity switchActivity;
 
     public VendorAdapter(Context context, ListOfVendor vendors) {
         this.mInflater = LayoutInflater.from(context);
@@ -58,7 +60,7 @@ public class VendorAdapter extends BaseAdapter implements Filterable {
 
         layoutItem.setOnClickListener(v -> {
             // if (listener!=null) listener.onClickName(position);
-            Log.d("VendorAdapter", "click " + (position + 1));
+            switchActivity.onClickSwitch(VendorDetailsActivity.class, vendors.indexOf(currentVendors.get(position)));
         });
 
         return layoutItem;
@@ -102,5 +104,9 @@ public class VendorAdapter extends BaseAdapter implements Filterable {
             notifyDataSetChanged();
         }
 
+    }
+
+    public void setSwitchActivity(SwitchActivity switchActivity){
+        this.switchActivity = switchActivity;
     }
 }

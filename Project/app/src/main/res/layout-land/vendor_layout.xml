@@ -4,12 +4,12 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     tools:context=".vendor.VendorDetailsActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         android:id="@+id/vend_desc"
         app:layout_constraintHeight_percent="0.4">
@@ -41,9 +41,6 @@
             android:layout_marginTop="100dp"
             android:layout_toRightOf="@id/image"/>
     </RelativeLayout>
-
-
-
 
 
 
