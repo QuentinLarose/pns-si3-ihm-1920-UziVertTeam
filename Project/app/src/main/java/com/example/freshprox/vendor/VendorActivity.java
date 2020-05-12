@@ -1,6 +1,9 @@
 package com.example.freshprox.vendor;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -18,6 +21,8 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
 import com.example.freshprox.R;
 import com.example.freshprox.SwitchActivity;
@@ -29,8 +34,11 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Objects;
 
 public class VendorActivity extends AppCompatActivity {
+    private static final String CHANNEL_ID = "mainChannel";
+    private static final int NOTIFICATION_ID = 1;
     private ListOfVendor vendors;
 
     @Override
@@ -91,6 +99,28 @@ public class VendorActivity extends AppCompatActivity {
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putString("vendors list", newJson);
                 editor.apply();
+
+                //Notification
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    CharSequence notifName = "Notification channel name";
+                    int importance = NotificationManager.IMPORTANCE_DEFAULT;
+                    NotificationChannel channel = new NotificationChannel(CHANNEL_ID, notifName, importance);
+                    channel.setDescription("Notification channel description");
+                    // Enregister le canal sur le système : attention de ne plus rien modifier après
+                    NotificationManager notificationManager = getSystemService(NotificationManager.class);
+                    Objects.requireNonNull(notificationManager).createNotificationChannel(channel);
+                }
+
+                NotificationManagerCompat notificationManager = NotificationManagerCompat.from(getApplicationContext());
+
+                NotificationCompat.Builder notifBuilder = new NotificationCompat.Builder(getApplicationContext(), CHANNEL_ID)
+                        .setSmallIcon(R.drawable.ic_launcher_foreground)
+                        .setContentTitle("Nouveau producteur ajouté")
+                        .setContentText("Il est maintenant accessible dans la liste des vendeurs")
+                        .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+
+                // notificationId est un identificateur unique par notification qu'il vous faut définir
+                notificationManager.notify(NOTIFICATION_ID, notifBuilder.build());
             }
         });
     }
