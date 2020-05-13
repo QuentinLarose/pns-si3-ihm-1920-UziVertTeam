@@ -7,6 +7,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RadioButton;
@@ -78,6 +79,19 @@ public class VendorActivity extends AppCompatActivity {
                     prix = Vendor.PraticedPrice.moderate;
                 }
 
+                //Trucs en vente
+                ArrayList<Vendor.Product> productList = new ArrayList<>();
+                CheckBox vegeBox = findViewById(R.id.checkbox_vegetables);
+                if (vegeBox.isChecked()){ productList.add(Vendor.Product.fruitLegumes);}
+                CheckBox meatBox = findViewById(R.id.checkbox_meat);
+                if (meatBox.isChecked()){ productList.add(Vendor.Product.viandes);}
+                CheckBox fishBox = findViewById(R.id.checkbox_vegetables);
+                if (fishBox.isChecked()){ productList.add(Vendor.Product.poissons);}
+                CheckBox cheeseBox = findViewById(R.id.checkbox_vegetables);
+                if (cheeseBox.isChecked()){ productList.add(Vendor.Product.fromage);}
+
+
+
                 //On récupère pour re-push
                 SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
                 Gson gson = new Gson();
@@ -89,8 +103,9 @@ public class VendorActivity extends AppCompatActivity {
                     vendorsList = new ArrayList<>();
                 }
 
+                if (passing == false) return;
                 //Création du commerçant
-                Vendor newVendor = new Vendor(name, new Address("Dans la rue gros", "06410", "Biot"), prix, Arrays.asList(new Vendor.Product[]{Vendor.Product.fruitLegumes}), R.mipmap.legumes, phone, 0, 0);
+                Vendor newVendor = new Vendor(name, new Address("Dans la rue gros", "06410", "Biot"), prix, productList, R.mipmap.legumes, phone, 0, 0);
                 vendorsList.add(newVendor);
 
                 //On ajoute et on re-push
