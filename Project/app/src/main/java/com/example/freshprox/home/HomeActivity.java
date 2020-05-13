@@ -29,7 +29,7 @@ public class HomeActivity extends AppCompatActivity {
         findViewById(R.id.guest_connection_button).setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(v.getContext(),"Suppression Fragment: ", Toast.LENGTH_LONG).show();
+                //Toast.makeText(v.getContext(),"Suppression Fragment: ", Toast.LENGTH_LONG).show();
                 onButtonActivityClicked(v);
             }
         });
@@ -38,7 +38,7 @@ public class HomeActivity extends AppCompatActivity {
 
 
     public void onButtonActivityClicked(View button) {
-        Toast.makeText(this,"Changement vers MainActivity: ", Toast.LENGTH_LONG).show();
+        //Toast.makeText(this,"Changement vers MainActivity: ", Toast.LENGTH_LONG).show();
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);
     }

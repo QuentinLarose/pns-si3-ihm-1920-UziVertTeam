@@ -5,6 +5,7 @@ import android.app.NotificationManager;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -32,7 +33,15 @@ import com.example.freshprox.search.ListOfProducerFragment;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.lang.reflect.Type;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
@@ -82,14 +91,66 @@ public class VendorActivity extends AppCompatActivity {
                 //Trucs en vente
                 ArrayList<Vendor.Product> productList = new ArrayList<>();
                 CheckBox vegeBox = findViewById(R.id.checkbox_vegetables);
-                if (vegeBox.isChecked()){ productList.add(Vendor.Product.fruitLegumes);}
-                CheckBox meatBox = findViewById(R.id.checkbox_meat);
-                if (meatBox.isChecked()){ productList.add(Vendor.Product.viandes);}
-                CheckBox fishBox = findViewById(R.id.checkbox_vegetables);
-                if (fishBox.isChecked()){ productList.add(Vendor.Product.poissons);}
-                CheckBox cheeseBox = findViewById(R.id.checkbox_vegetables);
-                if (cheeseBox.isChecked()){ productList.add(Vendor.Product.fromage);}
+                boolean checked = false;
 
+                if (vegeBox.isChecked()){
+                    productList.add(Vendor.Product.fruitLegumes);
+                    checked = true;
+                }
+                CheckBox meatBox = findViewById(R.id.checkbox_meat);
+                if (meatBox.isChecked()){
+                    productList.add(Vendor.Product.viandes);
+                    checked = true;
+                }
+                CheckBox fishBox = findViewById(R.id.checkbox_vegetables);
+                if (fishBox.isChecked()){
+                    productList.add(Vendor.Product.poissons);
+                    checked = true;
+                }
+                CheckBox cheeseBox = findViewById(R.id.checkbox_vegetables);
+                if (cheeseBox.isChecked()){
+                    productList.add(Vendor.Product.fromage);
+                    checked = true;
+                }
+
+                if (!checked){
+                    vegeBox.setError("Veuillez choisir au moins une catégorie !");
+                    return;
+                }
+
+                //Localisation dans l'espace
+                EditText editAddress = (EditText)findViewById(R.id.adress_locator);
+                String address = editAddress.getText().toString();
+                if (address.matches("")){
+                    editName.setError("L'adresse ne peut pas être vide !");
+                    passing = false;
+                }
+
+                EditText editCode = (EditText)findViewById(R.id.postal_code);
+                String code = editCode.getText().toString();
+
+                EditText editCity = (EditText)findViewById(R.id.city);
+                String city = editCity.getText().toString();
+                if (city.matches("")){
+                    editCity.setError("La ville ne peut pas être vide !");
+                    passing = false;
+                }
+
+                Address adresse = new Address(address, code, city);
+
+                EditText editLat = (EditText)findViewById(R.id.lat);
+                EditText editLng = (EditText)findViewById(R.id.lng);
+                if (editLat.getText().toString().matches("") || editLng.getText().toString().matches("")){
+                    Toast.makeText(getApplicationContext(),"Merci de remplir les champs Latitude et Longitude", Toast.LENGTH_LONG).show();
+                    passing = false;
+                    return;
+                }
+                double lat = Double.valueOf(String.valueOf(editLat.getText()));
+                double lng = Double.valueOf(String.valueOf(editLng.getText()));
+                if (editLat.getText().toString().matches("") || editLng.getText().toString().matches("")){
+                    Toast.makeText(getApplicationContext(),"Merci de remplir les champs Latitude et Longitude", Toast.LENGTH_LONG).show();
+                    passing = false;
+                }
 
 
                 //On récupère pour re-push
@@ -105,7 +166,7 @@ public class VendorActivity extends AppCompatActivity {
 
                 if (passing == false) return;
                 //Création du commerçant
-                Vendor newVendor = new Vendor(name, new Address("Dans la rue gros", "06410", "Biot"), prix, productList, R.mipmap.legumes, phone, 0, 0);
+                Vendor newVendor = new Vendor(name, adresse, prix, productList, R.mipmap.legumes, phone, lat, lng);
                 vendorsList.add(newVendor);
 
                 //On ajoute et on re-push
@@ -136,8 +197,35 @@ public class VendorActivity extends AppCompatActivity {
 
                 // notificationId est un identificateur unique par notification qu'il vous faut définir
                 notificationManager.notify(NOTIFICATION_ID, notifBuilder.build());
+
+                finish();
             }
         });
+    }
+
+    public static JSONObject getJSONObjectFromURL(String urlString) throws IOException, JSONException {
+        HttpURLConnection urlConnection = null;
+        URL url = new URL(urlString);
+        urlConnection = (HttpURLConnection) url.openConnection();
+        urlConnection.setRequestMethod("GET");
+        urlConnection.setReadTimeout(10000 /* milliseconds */ );
+        urlConnection.setConnectTimeout(15000 /* milliseconds */ );
+        urlConnection.setDoOutput(true);
+        urlConnection.connect();
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(url.openStream()));
+        StringBuilder sb = new StringBuilder();
+
+        String line;
+        while ((line = br.readLine()) != null) {
+            sb.append(line + "\n");
+        }
+        br.close();
+
+        String jsonString = sb.toString();
+        System.out.println("JSON: " + jsonString);
+
+        return new JSONObject(jsonString);
     }
 
 }
