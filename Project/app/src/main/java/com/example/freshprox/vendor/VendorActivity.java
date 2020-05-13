@@ -30,6 +30,7 @@ import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.osmdroid.util.GeoPoint;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -48,6 +49,7 @@ public class VendorActivity extends AppCompatActivity {
     private ListOfVendor vendors;
     private ListOfProducerFragment lOPF;
     private Boolean isLOPF;
+    private GeoPoint posVendeur = new GeoPoint(0.0,0.0);
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -143,8 +145,11 @@ public class VendorActivity extends AppCompatActivity {
                     passing = false;
                     return;
                 }
-                double lat = Double.valueOf(String.valueOf(editLat.getText()));
-                double lng = Double.valueOf(String.valueOf(editLng.getText()));
+                //double lat = Double.valueOf(String.valueOf(editLat.getText()));
+                //double lng = Double.valueOf(String.valueOf(editLng.getText()));
+                double lat = posVendeur.getLatitude();
+                double lng = posVendeur.getLongitude();
+                Log.d("LAROSE", "Latitude;Longitude : "+lat+";"+lng);
                 if (editLat.getText().toString().matches("") || editLng.getText().toString().matches("")){
                     Toast.makeText(getApplicationContext(),"Merci de remplir les champs Latitude et Longitude", Toast.LENGTH_LONG).show();
                     passing = false;
@@ -237,9 +242,10 @@ public class VendorActivity extends AppCompatActivity {
         return new JSONObject(jsonString);
     }
 
-    public void closeMap(Double [] coord){
+    public void closeMap(GeoPoint geopoint){
         if(mapFragment!=null){
             getSupportFragmentManager().beginTransaction().remove(mapFragment).commit();
+            posVendeur = geopoint;
         }
     }
 

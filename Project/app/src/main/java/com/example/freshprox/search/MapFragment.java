@@ -45,6 +45,7 @@ public class MapFragment extends Fragment implements View.OnClickListener{
     VendorActivity vA;
     ArrayList<Vendor> vendors;
     boolean param = true;
+    GeoPoint point = new GeoPoint(0.0,0.0);
 
     public MapFragment(){
         Log.d("LAROSE","MapFrgament");
@@ -80,7 +81,7 @@ public class MapFragment extends Fragment implements View.OnClickListener{
             }
         } else if (vA != null){
             btn.setOnClickListener(v -> {
-                vA.closeMap(new Double[]{});
+                vA.closeMap(new GeoPoint(point.getLatitude(),point.getLongitude()));
             });
         }
         map = (MapView) view.findViewById(R.id.map);
@@ -99,6 +100,31 @@ public class MapFragment extends Fragment implements View.OnClickListener{
         map.setFlingEnabled(true);
 
         ArrayList<OverlayItem> items = new ArrayList<>();
+
+        MapEventsReceiver mReceive = new MapEventsReceiver() {
+            @Override
+            public boolean singleTapConfirmedHelper(GeoPoint p) {
+                if(param){
+                    param = false;
+                    Log.d("LAROSE","Point = "+p.getLatitude()+" ; "+p.getLongitude());
+                    Bundle bundle = new Bundle();
+                    bundle.putDouble("lat",p.getLatitude());
+                    bundle.putDouble("long",p.getLongitude());
+                    items.add(new OverlayItem("test","test",new GeoPoint(p.getLatitude(),p.getLongitude())));
+                    point = new GeoPoint(p.getLatitude(),p.getLongitude());
+                }
+                return true;
+            }
+
+            @Override
+            public boolean longPressHelper(GeoPoint p) {
+                return false;
+            }
+        };
+        MapEventsOverlay OverlayEvents = new MapEventsOverlay(getContext(), mReceive);
+        map.getOverlays().add(OverlayEvents);
+
+
         OverlayItem home = new OverlayItem("Ptit Tieks","my home",new GeoPoint(43.55710983276367,6.980123519897461));
         Drawable m = home.getMarker(0);
         items.add(home);
@@ -137,27 +163,7 @@ public class MapFragment extends Fragment implements View.OnClickListener{
         mOverlay.setFocusItemsOnTap(true);
         map.getOverlays().add(mOverlay);
         Log.d("LAROSE","Creation map FIN");
-        MapEventsReceiver mReceive = new MapEventsReceiver() {
-            @Override
-            public boolean singleTapConfirmedHelper(GeoPoint p) {
-                if(param){
-                    param = false;
-                    Log.d("LAROSE","Point = "+p.getLatitude()+" ; "+p.getLongitude());
-                    Bundle bundle = new Bundle();
-                    bundle.putDouble("lat",p.getLatitude());
-                    bundle.putDouble("long",p.getLongitude());
-                    items.add(new OverlayItem("test","test",new GeoPoint(p.getLatitude(),p.getLongitude())));
-                }
-                return true;
-            }
 
-            @Override
-            public boolean longPressHelper(GeoPoint p) {
-                return false;
-            }
-        };
-        MapEventsOverlay OverlayEvents = new MapEventsOverlay(getContext(), mReceive);
-        map.getOverlays().add(OverlayEvents);
         return view;
     }
 
