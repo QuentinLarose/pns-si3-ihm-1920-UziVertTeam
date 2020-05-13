@@ -10,16 +10,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.SearchView;
+
 import android.widget.Toast;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.RelativeLayout;
-import android.widget.SearchView;
-import android.widget.TextView;
+
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,9 +22,9 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
 import com.example.freshprox.R;
-import com.example.freshprox.SwitchActivity;
-import com.example.freshprox.main.MainFragment;
+
 import com.example.freshprox.search.ListOfProducerFragment;
+import com.example.freshprox.search.MapFragment;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -47,9 +42,12 @@ import java.util.Arrays;
 import java.util.Objects;
 
 public class VendorActivity extends AppCompatActivity {
+    private MapFragment mapFragment;
     private static final String CHANNEL_ID = "mainChannel";
     private static final int NOTIFICATION_ID = 1;
     private ListOfVendor vendors;
+    private ListOfProducerFragment lOPF;
+    private Boolean isLOPF;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -226,6 +224,37 @@ public class VendorActivity extends AppCompatActivity {
         System.out.println("JSON: " + jsonString);
 
         return new JSONObject(jsonString);
+    }
+
+    public void changeFragment(){
+        if(lOPF != null){
+            getSupportFragmentManager().beginTransaction().remove(lOPF).commit();
+            isLOPF = false;
+            lOPF = null;
+            Toast.makeText(this,"dans le fragment dessous avec: ", Toast.LENGTH_LONG).show();
+            mapFragment = (MapFragment) getSupportFragmentManager().findFragmentById(R.id.frame_layout_map);
+            if(mapFragment == null){
+                mapFragment = new MapFragment();
+                Bundle args = new Bundle();
+                args.putBoolean("AJOUT",true);
+                mapFragment.setArguments(args);
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.frame_layout_map,mapFragment).commit();
+            }
+        }else{
+            getSupportFragmentManager().beginTransaction().remove(mapFragment).commit();
+            isLOPF = true;
+            mapFragment = null;
+            lOPF = (ListOfProducerFragment) getSupportFragmentManager().findFragmentById(R.id.frame_layout_lOP);
+            if(lOPF == null){
+                Log.d("SA", "lOPF created via onCreate");
+                lOPF = new ListOfProducerFragment();
+                Bundle args = new Bundle();
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.frame_layout_lOP, lOPF).commit();
+            }
+        }
+
     }
 
 }

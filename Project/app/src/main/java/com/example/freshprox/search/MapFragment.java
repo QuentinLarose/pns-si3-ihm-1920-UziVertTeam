@@ -22,15 +22,18 @@ import com.google.gson.reflect.TypeToken;
 
 import org.osmdroid.api.IMapController;
 import org.osmdroid.config.Configuration;
+import org.osmdroid.events.MapEventsReceiver;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.ItemizedIconOverlay;
 import org.osmdroid.views.overlay.ItemizedOverlayWithFocus;
+import org.osmdroid.views.overlay.MapEventsOverlay;
 import org.osmdroid.views.overlay.OverlayItem;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Map;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -39,6 +42,7 @@ public class MapFragment extends Fragment implements View.OnClickListener{
     IMapController mapController;
     SearchActivity sA;
     ArrayList<Vendor> vendors;
+    boolean param = true;
 
     public MapFragment(){
         Log.d("LAROSE","MapFrgament");
@@ -51,6 +55,11 @@ public class MapFragment extends Fragment implements View.OnClickListener{
         Log.d("LAROSE","Creation map debut OnCreateView");
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
+
+        Log.d("LAROSE"," TEST");
+        param = getArguments().getBoolean("AJOUT");
+
+        Log.d("LAROSE","Valeur param from activity: "+param);
 
         Configuration.getInstance().load(getContext(), PreferenceManager.getDefaultSharedPreferences(getContext()));
 
@@ -65,16 +74,18 @@ public class MapFragment extends Fragment implements View.OnClickListener{
         }
         map = (MapView) view.findViewById(R.id.map);
         Log.d("LAROSE","map= "+map);
-        /*
-        map.setTileSource(TileSourceFactory.MAPNIK);
-        configMap();
-         */
+
         map.setTileSource(TileSourceFactory.MAPNIK);
         map.setBuiltInZoomControls(true);
         GeoPoint startPoint = new GeoPoint(43.55,7.0167);
         mapController = map.getController();
         mapController.setZoom(10.0);
         mapController.setCenter(startPoint);
+        map.setBuiltInZoomControls(true);
+        map.setMultiTouchControls(true);
+        Log.d("TAG","Config map");
+
+        map.setFlingEnabled(true);
 
         ArrayList<OverlayItem> items = new ArrayList<>();
         OverlayItem home = new OverlayItem("Ptit Tieks","my home",new GeoPoint(43.55710983276367,6.980123519897461));
@@ -115,6 +126,27 @@ public class MapFragment extends Fragment implements View.OnClickListener{
         mOverlay.setFocusItemsOnTap(true);
         map.getOverlays().add(mOverlay);
         Log.d("LAROSE","Creation map FIN");
+        MapEventsReceiver mReceive = new MapEventsReceiver() {
+            @Override
+            public boolean singleTapConfirmedHelper(GeoPoint p) {
+                if(param){
+                    param = false;
+                    Log.d("LAROSE","Point = "+p.getLatitude()+" ; "+p.getLongitude());
+                    Bundle bundle = new Bundle();
+                    bundle.putDouble("lat",p.getLatitude());
+                    bundle.putDouble("long",p.getLongitude());
+                    items.add(new OverlayItem("test","test",new GeoPoint(p.getLatitude(),p.getLongitude())));
+                }
+                return true;
+            }
+
+            @Override
+            public boolean longPressHelper(GeoPoint p) {
+                return false;
+            }
+        };
+        MapEventsOverlay OverlayEvents = new MapEventsOverlay(getContext(), mReceive);
+        map.getOverlays().add(OverlayEvents);
         return view;
     }
 
