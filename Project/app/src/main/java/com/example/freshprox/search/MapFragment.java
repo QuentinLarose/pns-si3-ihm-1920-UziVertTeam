@@ -1,7 +1,5 @@
 package com.example.freshprox.search;
 
-import android.Manifest;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -11,14 +9,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.LinearLayout;
 
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceManager;
 
-import com.example.freshprox.BuildConfig;
 import com.example.freshprox.R;
+import com.example.freshprox.vendor.ListOfVendor;
+import com.example.freshprox.vendor.Vendor;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 
 import org.osmdroid.api.IMapController;
 import org.osmdroid.config.Configuration;
@@ -29,12 +29,16 @@ import org.osmdroid.views.overlay.ItemizedIconOverlay;
 import org.osmdroid.views.overlay.ItemizedOverlayWithFocus;
 import org.osmdroid.views.overlay.OverlayItem;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class MapFragment extends Fragment implements View.OnClickListener{
     private MapView map;
     IMapController mapController;
     SearchActivity sA;
+    ArrayList<Vendor> vendors;
 
     public MapFragment(){
         Log.d("LAROSE","MapFrgament");
@@ -77,6 +81,23 @@ public class MapFragment extends Fragment implements View.OnClickListener{
         Drawable m = home.getMarker(0);
         items.add(home);
         items.add(new OverlayItem("King Tacos","Tacos le S",new GeoPoint(43.555202,6.9719)));
+
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("shared preferences", MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = sharedPreferences.getString("vendors list", null);
+        Type type = new TypeToken<ArrayList<Vendor>>() {
+        }.getType();
+        ArrayList<Vendor> vendorsList = gson.fromJson(json, type);
+        if (vendorsList == null) {
+            vendorsList = new ArrayList<>();
+        }
+        this.vendors = new ListOfVendor(false);
+        vendors.addAll(vendorsList);
+
+        for(Vendor v : vendors){
+            items.add(new OverlayItem(v.getName(),v.getName(),new GeoPoint(v.getLatitude(),v.getLongitude())));
+            Log.d("LAROSE","Vendeur = "+v.getName()+" : "+v.getLatitude()+" ; "+v.getLongitude());
+        }
 
         ItemizedOverlayWithFocus<OverlayItem> mOverlay = new ItemizedOverlayWithFocus<OverlayItem>(getContext(), items, new ItemizedIconOverlay.OnItemGestureListener<OverlayItem>() {
 
