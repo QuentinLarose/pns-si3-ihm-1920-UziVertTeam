@@ -119,7 +119,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
             if(mapFragment == null){
                 mapFragment = new MapFragment();
                 Bundle args = new Bundle();
-                args.putBoolean("AJOUT",true);
+                args.putBoolean("AJOUT",false);
                 mapFragment.setArguments(args);
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.frame_layout_map,mapFragment).commit();
