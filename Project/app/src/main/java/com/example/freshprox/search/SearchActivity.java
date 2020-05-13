@@ -97,18 +97,13 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onButtonMapClicked(View button) {
-
         Toast.makeText(this,"dans le fragment dessous avec: ", Toast.LENGTH_LONG).show();
        mapFragment = (MapFragment) getSupportFragmentManager().findFragmentById(R.id.frame_layout_map);
         if(mapFragment == null){
             mapFragment = new MapFragment();
             Bundle args = new Bundle();
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.frame_layout_map,mapFragment).commit();
-        }
-        if(mapFragment == null){
-            mapFragment = new MapFragment();
-            Bundle args = new Bundle();
+            args.putString("AJOUT","false");
+            mapFragment.setArguments(args);
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.frame_layout_map,mapFragment).commit();
         }
@@ -124,6 +119,8 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
             if(mapFragment == null){
                 mapFragment = new MapFragment();
                 Bundle args = new Bundle();
+                args.putBoolean("AJOUT",true);
+                mapFragment.setArguments(args);
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.frame_layout_map,mapFragment).commit();
             }
