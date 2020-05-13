@@ -16,6 +16,7 @@ import androidx.preference.PreferenceManager;
 import com.example.freshprox.R;
 import com.example.freshprox.vendor.ListOfVendor;
 import com.example.freshprox.vendor.Vendor;
+import com.example.freshprox.vendor.VendorActivity;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -41,6 +42,7 @@ public class MapFragment extends Fragment implements View.OnClickListener{
     private MapView map;
     IMapController mapController;
     SearchActivity sA;
+    VendorActivity vA;
     ArrayList<Vendor> vendors;
     boolean param = true;
 
@@ -51,7 +53,10 @@ public class MapFragment extends Fragment implements View.OnClickListener{
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-        this.sA = (SearchActivity) getActivity();
+        if(getActivity() instanceof SearchActivity)
+            this.sA = (SearchActivity) getActivity();
+        else
+            this.vA = (VendorActivity) getActivity();
         Log.d("LAROSE","Creation map debut OnCreateView");
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
@@ -65,12 +70,18 @@ public class MapFragment extends Fragment implements View.OnClickListener{
 
         View view = inflater.inflate(R.layout.map_fragment, container, false);
         Button btn = view.findViewById(R.id.retour);
-        if(getResources().getDisplayMetrics().heightPixels<1200 || getResources().getConfiguration().orientation == android.content.res.Configuration.ORIENTATION_PORTRAIT){
+        if(sA != null) {
+            if (getResources().getDisplayMetrics().heightPixels < 1200 || getResources().getConfiguration().orientation == android.content.res.Configuration.ORIENTATION_PORTRAIT) {
+                btn.setOnClickListener(v -> {
+                    sA.changeFragment();
+                });
+            } else {
+                ((ViewGroup) btn.getParent()).removeView(btn);
+            }
+        } else if (vA != null){
             btn.setOnClickListener(v -> {
-                sA.changeFragment();
+                vA.closeMap(new Double[]{});
             });
-        } else {
-            ((ViewGroup) btn.getParent()).removeView(btn);
         }
         map = (MapView) view.findViewById(R.id.map);
         Log.d("LAROSE","map= "+map);

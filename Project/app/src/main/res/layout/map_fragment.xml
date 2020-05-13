@@ -5,7 +5,8 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".search.MapFragment">
+    tools:context=".search.MapFragment"
+    android:background="#ffd700">
 
     <Button
         android:layout_width="wrap_content"

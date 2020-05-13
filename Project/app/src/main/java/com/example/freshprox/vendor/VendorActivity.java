@@ -199,6 +199,17 @@ public class VendorActivity extends AppCompatActivity {
                 finish();
             }
         });
+        Button btn = findViewById(R.id.mapButton);
+        btn.setOnClickListener(v -> {
+            if(mapFragment == null) {
+                mapFragment = new MapFragment();
+                Bundle args = new Bundle();
+                args.putBoolean("AJOUT",true);
+                mapFragment.setArguments(args);
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.main, mapFragment).commit();
+            }
+        });
     }
 
     public static JSONObject getJSONObjectFromURL(String urlString) throws IOException, JSONException {
@@ -226,35 +237,10 @@ public class VendorActivity extends AppCompatActivity {
         return new JSONObject(jsonString);
     }
 
-    public void changeFragment(){
-        if(lOPF != null){
-            getSupportFragmentManager().beginTransaction().remove(lOPF).commit();
-            isLOPF = false;
-            lOPF = null;
-            Toast.makeText(this,"dans le fragment dessous avec: ", Toast.LENGTH_LONG).show();
-            mapFragment = (MapFragment) getSupportFragmentManager().findFragmentById(R.id.frame_layout_map);
-            if(mapFragment == null){
-                mapFragment = new MapFragment();
-                Bundle args = new Bundle();
-                args.putBoolean("AJOUT",true);
-                mapFragment.setArguments(args);
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.frame_layout_map,mapFragment).commit();
-            }
-        }else{
+    public void closeMap(Double [] coord){
+        if(mapFragment!=null){
             getSupportFragmentManager().beginTransaction().remove(mapFragment).commit();
-            isLOPF = true;
-            mapFragment = null;
-            lOPF = (ListOfProducerFragment) getSupportFragmentManager().findFragmentById(R.id.frame_layout_lOP);
-            if(lOPF == null){
-                Log.d("SA", "lOPF created via onCreate");
-                lOPF = new ListOfProducerFragment();
-                Bundle args = new Bundle();
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.frame_layout_lOP, lOPF).commit();
-            }
         }
-
     }
 
 }
