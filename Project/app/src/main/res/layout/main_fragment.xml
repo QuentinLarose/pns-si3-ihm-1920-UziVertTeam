@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
@@ -7,52 +7,45 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".main.MainFragment"
-    android:weightSum="1.0">
+    android:background="#ffd700">
 
     <TextView
         android:id="@+id/message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="invisible"
-        android:text="MainFragment"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:text="MainFragment" />
 
     <TextView
         android:id="@+id/title"
-        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintWidth_percent="0.7"
         android:textSize="32dp"
         android:textAlignment="center"
-        android:layout_marginTop="30dp"
-        android:text="Sélectionner une rubrique"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:gravity="center"
+        android:text="Sélectionnez une rubrique"
+        android:layout_width="match_parent"
+        android:layout_weight="1"/>
 
     <Button
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintWidth_percent="0.8"
-        app:layout_constraintHeight_percent="0.25"
         android:id="@+id/tosearch"
         android:text="Trouver un producteur"
-        app:layout_constraintBottom_toTopOf="@id/message"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:textColor="#fff"
+        android:textStyle="bold"
+        android:layout_margin="30dp"
+        android:background = "@drawable/roundedbutton"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_weight="2"/>
 
     <Button
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintWidth_percent="0.8"
-        app:layout_constraintHeight_percent="0.25"
         android:id="@+id/vendor"
         android:text="Ajouter mon commerce"
-        app:layout_constraintTop_toBottomOf="@id/message"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        android:textColor="#fff"
+        android:textStyle="bold"
+        android:layout_margin="30dp"
+        android:background = "@drawable/roundedbutton"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_weight="2"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

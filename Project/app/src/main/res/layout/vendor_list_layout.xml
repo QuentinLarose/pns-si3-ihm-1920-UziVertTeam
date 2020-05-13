@@ -4,14 +4,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:layout_margin="15dp"
+    android:textColor="#fff"
+    android:background = "@drawable/roundedbutton">
 
     <ImageView
         android:id="@+id/imageVendor"
         android:layout_width="100dp"
         android:layout_height="130dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="10dp"/>
 
     <TextView
         android:id="@+id/vendorName"
@@ -19,7 +23,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         app:layout_constraintStart_toEndOf="@+id/imageVendor"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:textStyle="bold"/>
 
     <TextView
         android:layout_width="wrap_content"

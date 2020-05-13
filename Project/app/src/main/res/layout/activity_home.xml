@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginRight="50dp"
-    android:layout_marginLeft="50dp"
-    android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#ffd700"
+    android:gravity="center_horizontal">
         <TextView
             android:id="@+id/titreAppli"
             android:layout_width="wrap_content"
@@ -14,7 +14,8 @@
             android:layout_marginTop="50dp"
             android:text="FreshProx"
             android:layout_centerHorizontal="true"
-            android:textSize="32dp"/>
+            android:textSize="32dp"
+            android:layout_weight="2"/>
 
         <ImageView
             android:id="@+id/image"
@@ -23,6 +24,7 @@
             android:layout_marginTop="100dp"
             android:layout_below="@+id/titreAppli"
             android:layout_centerHorizontal="true"
+            android:layout_weight="2"
             />
 
         <Button
@@ -31,7 +33,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Se connecter avec un compte Google"
-            android:layout_below="@+id/image"/>
+            android:layout_below="@+id/image"
+            android:textColor="#fff"
+            android:textStyle="bold"
+            android:layout_margin="30dp"
+            android:background = "@drawable/roundedbutton"
+            android:layout_weight="1"/>
 
         <Button
             android:id="@+id/guest_connection_button"
@@ -39,6 +46,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Se connecter en tant qu'invité"
-            android:layout_below="@id/google_connection_button"/>
+            android:layout_below="@id/google_connection_button"
+            android:textColor="#fff"
+            android:textStyle="bold"
+            android:layout_margin="30dp"
+            android:background = "@drawable/roundedbutton"
+            android:layout_weight="1"/>
 
-</RelativeLayout>
+</LinearLayout>

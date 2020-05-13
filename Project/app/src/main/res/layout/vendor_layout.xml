@@ -5,7 +5,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    tools:context=".vendor.VendorDetailsActivity">
+    tools:context=".vendor.VendorDetailsActivity"
+    android:background="#ffd700"
+    >
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -47,7 +49,9 @@
             android:id="@+id/call"
             android:layout_marginTop="140dp"
             android:layout_toRightOf="@id/image"
-            android:onClick="callNumber"/>
+            android:onClick="callNumber"
+            android:textColor="#fff"
+            android:background = "@drawable/roundedbutton"/>
 
     </RelativeLayout>
 
