@@ -97,24 +97,9 @@
                     android:textColor="#fff"
                     android:padding="5dp"
                     android:textStyle="bold"
+                    android:layout_marginBottom="5dp"
                     android:background = "@drawable/roundedbutton"/>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <EditText
-                        android:id="@+id/lat"
-                        android:layout_height="wrap_content"
-                        android:inputType="numberSigned"
-                        android:layout_weight="1"
-                        android:layout_width="wrap_content" />
-                    <EditText
-                        android:id="@+id/lng"
-                        android:layout_height="wrap_content"
-                        android:inputType="numberSigned"
-                        android:layout_weight="1"
-                        android:layout_width="wrap_content"/>
-                </LinearLayout>
+
             </LinearLayout>
             <TextView
                 android:layout_height="wrap_content"

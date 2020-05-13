@@ -102,12 +102,12 @@ public class VendorActivity extends AppCompatActivity {
                     productList.add(Vendor.Product.viandes);
                     checked = true;
                 }
-                CheckBox fishBox = findViewById(R.id.checkbox_vegetables);
+                CheckBox fishBox = findViewById(R.id.checkbox_fish);
                 if (fishBox.isChecked()){
                     productList.add(Vendor.Product.poissons);
                     checked = true;
                 }
-                CheckBox cheeseBox = findViewById(R.id.checkbox_vegetables);
+                CheckBox cheeseBox = findViewById(R.id.checkbox_cheese);
                 if (cheeseBox.isChecked()){
                     productList.add(Vendor.Product.fromage);
                     checked = true;
@@ -138,23 +138,9 @@ public class VendorActivity extends AppCompatActivity {
 
                 Address adresse = new Address(address, code, city);
 
-                EditText editLat = (EditText)findViewById(R.id.lat);
-                EditText editLng = (EditText)findViewById(R.id.lng);
-                if (editLat.getText().toString().matches("") || editLng.getText().toString().matches("")){
-                    Toast.makeText(getApplicationContext(),"Merci de remplir les champs Latitude et Longitude", Toast.LENGTH_LONG).show();
-                    passing = false;
-                    return;
-                }
-                //double lat = Double.valueOf(String.valueOf(editLat.getText()));
-                //double lng = Double.valueOf(String.valueOf(editLng.getText()));
                 double lat = posVendeur.getLatitude();
                 double lng = posVendeur.getLongitude();
                 Log.d("LAROSE", "Latitude;Longitude : "+lat+";"+lng);
-                if (editLat.getText().toString().matches("") || editLng.getText().toString().matches("")){
-                    Toast.makeText(getApplicationContext(),"Merci de remplir les champs Latitude et Longitude", Toast.LENGTH_LONG).show();
-                    passing = false;
-                }
-
 
                 //On récupère pour re-push
                 SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
