@@ -7,7 +7,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".main.MainFragment"
-    android:weightSum="1.0">
+    android:weightSum="1.0"
+    android:background="#ffd700">
 
     <TextView
         android:id="@+id/message"
@@ -37,23 +38,30 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintWidth_percent="0.8"
-        app:layout_constraintHeight_percent="0.35"
-        android:layout_marginBottom="1pt"
+        app:layout_constraintHeight_percent="0.30"
+        android:layout_margin="10dp"
         android:id="@+id/tosearch"
         android:text="Trouver un producteur"
         app:layout_constraintTop_toBottomOf="@id/title"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:textColor="#fff"
+        android:textStyle="bold"
+        android:background = "@drawable/roundedbutton"/>
 
     <Button
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintWidth_percent="0.8"
-        app:layout_constraintHeight_percent="0.35"
+        app:layout_constraintHeight_percent="0.30"
+        android:layout_marginTop="20dp"
         android:id="@+id/vendor"
         android:text="Ajouter mon commerce"
         app:layout_constraintTop_toBottomOf="@id/tosearch"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        android:textColor="#fff"
+        android:textStyle="bold"
+        android:background = "@drawable/roundedbutton"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
